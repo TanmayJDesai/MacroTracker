@@ -15,15 +15,18 @@ const Homepage = () => {
     e.preventDefault();
     if (!item || !calories || !protein) return;
   
-    const totalCalories = quantity * parseInt(calories);
-    const totalProtein = quantity * parseInt(protein);
+    // Use parseFloat instead of parseInt and round to 1 decimal place
+    const totalCalories = parseFloat((quantity * parseFloat(calories)).toFixed(1));
+    const totalProtein = parseFloat((quantity * parseFloat(protein)).toFixed(1));
     const date = format(new Date(), "yyyy-MM-dd");
   
     try {
       await addDoc(collection(db, "meals"), {
         mealType,
         item,
-        quantity,
+        quantity: parseFloat(quantity),
+        calories: parseFloat(calories),
+        protein: parseFloat(protein),
         totalCalories,
         totalProtein,
         date,
@@ -95,7 +98,8 @@ const Homepage = () => {
                     placeholder="How many?"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
-                    min="1"
+                    min="0.1"
+                    step="0.1"
                     className="input-number"
                     required
                   />
@@ -109,6 +113,8 @@ const Homepage = () => {
                     placeholder="Calories"
                     value={calories}
                     onChange={(e) => setCalories(e.target.value)}
+                    step="0.1"
+                    min="0"
                     className="input-number"
                     required
                   />
@@ -124,6 +130,8 @@ const Homepage = () => {
                   placeholder="Protein in grams"
                   value={protein}
                   onChange={(e) => setProtein(e.target.value)}
+                  step="0.1"
+                  min="0"
                   className="input-number"
                   required
                 />

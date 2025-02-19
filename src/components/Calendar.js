@@ -43,15 +43,15 @@ const CalendarPage = () => {
 
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      totalCalories += data.totalCalories;
-      totalProtein += data.totalProtein;
+      totalCalories += parseFloat(data.totalCalories);
+      totalProtein += parseFloat(data.totalProtein);
       
       mealsByType[data.mealType].push({
         id: doc.id,
         item: data.item,
         quantity: data.quantity,
-        calories: data.totalCalories,
-        protein: data.totalProtein
+        calories: parseFloat(data.totalCalories),
+        protein: parseFloat(data.totalProtein)
       });
     });
 
@@ -79,6 +79,12 @@ const CalendarPage = () => {
     }
   };
 
+  const formatNumber = (value) => {
+    // Format to 1 decimal place, but only if there's a decimal component
+    const formatted = parseFloat(value).toFixed(1);
+    return formatted.endsWith('.0') ? Math.floor(value) : formatted;
+  };
+
   const MealSection = ({ title, meals }) => {
     if (meals.length === 0) return null;
     
@@ -90,8 +96,8 @@ const CalendarPage = () => {
         <div className="meal-header">
           <h4 className="meal-title">{title}</h4>
           <div className="meal-totals">
-            <span>{totalCalories} cal</span>
-            <span>{totalProtein}g protein</span>
+            <span>{formatNumber(totalCalories)} cal</span>
+            <span>{formatNumber(totalProtein)}g protein</span>
           </div>
         </div>
         <div className="meal-items">
@@ -103,8 +109,8 @@ const CalendarPage = () => {
               </div>
               <div className="meal-item-details">
                 <div className="meal-item-stats">
-                  <span>{meal.calories} cal</span>
-                  <span>{meal.protein}g protein</span>
+                  <span>{formatNumber(meal.calories)} cal</span>
+                  <span>{formatNumber(meal.protein)}g protein</span>
                 </div>
                 <button 
                   className="delete-button"
@@ -149,14 +155,14 @@ const CalendarPage = () => {
                   <div className="stat-icon">🔥</div>
                   <div className="stat-content">
                     <p className="stat-label">Total Calories</p>
-                    <p className="stat-value">{dailyStats.totalCalories}</p>
+                    <p className="stat-value">{formatNumber(dailyStats.totalCalories)}</p>
                   </div>
                 </div>
                 <div className="summary-card">
                   <div className="stat-icon">💪</div>
                   <div className="stat-content">
                     <p className="stat-label">Total Protein</p>
-                    <p className="stat-value">{dailyStats.totalProtein}g</p>
+                    <p className="stat-value">{formatNumber(dailyStats.totalProtein)}g</p>
                   </div>
                 </div>
               </div>
