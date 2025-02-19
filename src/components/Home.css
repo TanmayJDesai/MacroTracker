@@ -1,0 +1,185 @@
+.homepage {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .content-wrapper {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .form-container {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+  
+  .form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  .form-title {
+    color: #2d3748;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .form-subtitle {
+    color: #718096;
+    font-size: 1rem;
+    margin: 0;
+  }
+  
+  .meal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 44% 44%; /* Each column takes 35% of the width */
+    gap: 1rem; /* Space between the columns */
+    justify-content: space-between; /* Ensures there is equal spacing between columns */
+  }
+  
+  .label-text {
+    display: block;
+    color: #4a5568;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input-text,
+  .input-number,
+  .input-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background: #f8fafc;
+  }
+  
+  .input-text:focus,
+  .input-number:focus,
+  .input-select:focus {
+    outline: none;
+    border-color: #7c3aed;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+  }
+  
+  .input-text::placeholder,
+  .input-number::placeholder {
+    color: #a0aec0;
+  }
+  
+  .submit-button {
+    background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+  }
+  
+  .submit-button:active {
+    transform: translateY(0);
+  }
+  
+  .button-text {
+    font-size: 1rem;
+  }
+  
+  .button-icon {
+    font-size: 1.25rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .submit-button:hover .button-icon {
+    transform: translateX(4px);
+  }
+  
+
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .homepage {
+      padding: 1rem;
+    }
+    
+    .form-container {
+      padding: 1.5rem;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .form-title {
+      font-size: 1.5rem;
+    }
+  }
+  
+  /* Adding a subtle animation for form inputs */
+  @keyframes formFieldFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .input-group {
+    animation: formFieldFadeIn 0.5s ease forwards;
+  }
+  
+  .input-group:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  
+  .input-group:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  .protein-group {
+    animation-delay: 0.3s;
+  }
